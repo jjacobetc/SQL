@@ -1,0 +1,42 @@
+--Create beverage store database
+
+CREATE TABLE beverages (id INTEGER PRIMARY KEY,country_import TEXT,category TEXT,name TEXT,price INTEGER,instock INTEGER);
+
+insert into beverages values (1,'FR','alc','red wine', 20, 9);
+insert into beverages values (2,'FR','alc','cognac', 35, 9);
+insert into beverages values (3,'FR','alc','brandy', 30, 14);
+insert into beverages values (4,'MX','alc','mezcal', 18, 22);
+insert into beverages values (5,'MX','alc','margarita', 18, 16);
+insert into beverages values (6,'US','juice','capri sun', 5, 2);
+insert into beverages values (7,'US','juice','apple juice', 5, 4);
+insert into beverages values (8,'US','water','arrowhead', 5, 15);
+insert into beverages values (9,'US','water','aquafina', 5, 32);
+insert into beverages values (10,'US','water','dasani', 4, 40);
+insert into beverages values (11,'US','water','nestle', 4, 20);
+insert into beverages values (12,'US','alc','bourbon', 24, 5);
+insert into beverages values (13,'US','alc','whiskey', 24, 14);
+insert into beverages values (14,'US','alc','craft beer', 14, 19);
+insert into beverages values (15,'US','soda','coca cola', 6, 12);
+insert into beverages values (16,'US','soda','7up', 5, 19);
+insert into beverages values (17,'US','soda','canada dry', 5, 30);
+insert into beverages values (18,'US','soda','barq', 5, 26);
+insert into beverages values (19,'RU','alc','vodka', 20, 15);
+insert into beverages values (20,'GB','alc', 'gin', 25, 12);
+
+--display the database ordered by price
+select * from beverages 
+order by price desc;
+
+--what is the avg price of soda sold in beverages?
+SELECT AVG(price)
+FROM beverages
+WHERE category='soda';
+
+--which country has the least amount in stock at the moment?
+SELECT country_import, sum(instock) from beverages group by country_import order by sum(instock) asc;
+
+--assume all drinks were stocked at 50 at the start of the week, which five products have sold the least?
+SELECT name, price, instock
+FROM beverages
+order by instock desc
+limit 5;
